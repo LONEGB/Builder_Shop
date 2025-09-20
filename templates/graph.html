@@ -1,0 +1,74 @@
+{% extends "main.html" %}
+{% block title %} Отчетность {% endblock %}
+{% block content %}
+    <div class="container mb-5">
+
+<div class="row">
+    <form  class="d-flex flex-column col-2" role="search" method="post">
+        {% csrf_token %}
+
+    <td><select name="year">
+                    <option value="">Выберите месяц</option>
+                    <option value="1">Январь</option>
+                    <option value="2">Февраль</option>
+                    <option value="3">Март</option>
+                    <option value="4">Апрель</option>
+                    <option value="5">Май</option>
+                    <option value="6">Июнь</option>
+                    <option value="7">Июль</option>
+                    <option value="8">Август</option>
+                    <option value="9">Сентябрь</option>
+                    <option value="10">Октябрь</option>
+                    <option value="11">Ноябрь</option>
+                    <option value="12">Декабрь</option>
+                 </select>
+            </td>
+
+        <div style="height: 10px"></div>
+        <button class="btn btn-outline-success" name="search" value="True" type="submit">Поиск</button>
+        <div style="height: 10px"></div>
+        <button class="btn btn-outline-secondary" name="search" value="False" type="submit">Сбросить</button>
+    </form>
+    <div class="col-10">
+    </div>
+</div>
+    <figure class="highcharts-figure">
+  <div id="container2"></div>
+</figure>
+
+<script>
+    (function() {
+        let charts_data = {{ charts_data|safe }}
+        let charts_categories = {{ charts_categories|safe }}
+        Highcharts.chart('container2', {
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: 'Динамика покупок'
+            },
+            xAxis: {
+                categories: charts_categories
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                  text: 'Количество покупок'
+                }
+            },
+            plotOptions: {
+                line: {
+                    dataLabels: {
+                        enabled: true
+                    },
+                    enableMouseTracking: false
+                }
+            },
+            series: charts_data
+        });
+    })()
+</script>
+
+</div>
+
+{% endblock %}

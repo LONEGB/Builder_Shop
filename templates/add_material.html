@@ -1,0 +1,21 @@
+{% extends "main.html" %}
+
+{% block title %}Добавление товара{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <form class="form-horizontal d-flex justify-content-center align-items-center" method="post"
+              action="{% url 'add_material' %}" enctype="multipart/form-data">
+            <div class="jumbotron shadow-sm px-5 py-5">
+                <h1 class="d-flex justify-content-center mb-4">Добавление товара</h1>
+
+                <div class="d-flex justify-content-center flex-column">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="btn btn-primary btn-block mt-4 align-content-center" type="submit">Добавить
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

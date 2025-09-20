@@ -1,0 +1,54 @@
+{% extends "main.html" %}
+{% load static %}
+{% block title %}
+{{ product.name }}
+{% endblock %}
+{% block content %}
+    {% if not request.user.is_authenticated %}
+        <div class="product-detail">
+<img src={{ product.image.url }}>
+<h1>{{ product.name }}</h1>
+    <p>Вес: {{ product.weight|default_if_none:"-" }}</p>
+    <p>Единица измерения: {{ product.measure|default_if_none:"-"  }}</p>
+    <p>Длина: {{ product.length|default_if_none:"-"  }}</p>
+    <p>Ширина: {{ product.width|default_if_none:"-"  }}</p>
+    <p>Высота: {{ product.height|default_if_none:"-"  }}</p>
+<p class="price">{{ product.price }}руб</p>
+</div>
+    {% endif %}
+
+    {% if user.groups.get.name == 'customer' %}
+<div class="product-detail">
+<img src={{ product.image.url }}>
+<h1>{{ product.name }}</h1>
+    <p>Вес: {{ product.weight|default_if_none:"-" }}</p>
+    <p>Единица измерения: {{ product.measure|default_if_none:"-"  }}</p>
+    <p>Длина: {{ product.length|default_if_none:"-"  }}</p>
+    <p>Ширина: {{ product.width|default_if_none:"-"  }}</p>
+    <p>Высота: {{ product.height|default_if_none:"-"  }}</p>
+<p class="price">{{ product.price }}руб</p>
+    <form action="{% url "cart:cart_add" product.material_id %}" method="post">
+    {{ cart_product_form }}
+    {% csrf_token %}
+    <input type="submit" value="Добавить в корзину">
+</form>
+</div>
+    {% endif %}
+
+    {% if user.groups.get.name == 'saler' %}
+<div class="product-detail">
+<img src={{ product.image.url }}>
+<h1>{{ product.name }}</h1>
+    <p>Вес: {{ product.weight|default_if_none:"-" }}</p>
+    <p>Единица измерения: {{ product.measure|default_if_none:"-"  }}</p>
+    <p>Длина: {{ product.length|default_if_none:"-"  }}</p>
+    <p>Ширина: {{ product.width|default_if_none:"-"  }}</p>
+    <p>Высота: {{ product.height|default_if_none:"-"  }}</p>
+<p class="price">{{ product.price }}руб</p>
+</div>
+    {% endif %}
+
+
+
+
+{% endblock %}

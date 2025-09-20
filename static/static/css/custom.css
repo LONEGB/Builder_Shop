@@ -1,0 +1,178 @@
+@charset "UTF-8";
+
+#sidebar {
+    width:220px;
+    padding:30px 20px 0 0;
+    float:left;
+}
+
+#sidebar ul{
+    margin:0;
+    padding:0;
+}
+
+#sidebar ul li {
+    margin:0;
+    list-style:none;
+    padding:10px 14px;
+}
+
+#sidebar ul li a {
+    display:block;
+}
+
+#sidebar ul li.selected {
+    background:#5993bb;
+    border-radius:4px;
+}
+
+#sidebar ul li.selected a {
+    color:#fff;
+}
+
+#main {
+    float:left;
+    width: 96%;
+    margin-right:-220px;
+    overflow:hidden;
+}
+
+.product-list .item {
+    width:25%;
+    padding:10px 20px 10px 0;
+    float:left;
+    text-align:center;
+    line-height:1.2;
+}
+
+.product-list .item img {
+    width:100%;
+    margin-bottom:8px;
+}
+
+.product-detail {
+    text-align:justify;
+}
+
+.product-detail .price {
+    color:#333;
+    font-size:28px;
+    font-weight:bold;
+}
+
+.product-detail img {
+    width:40%;
+    float:left;
+    padding:0 20px 20px 0;
+}
+
+.product-detail h1 {
+    margin-bottom:0;
+}
+
+.product-detail h2 {
+    margin-top:10px;
+}
+
+.carousel-image {
+    object-fit: cover;
+    height: 300px;
+    filter: brightness(30%);
+}
+
+.header-image {
+    object-fit: cover;
+    height: 120px;
+    filter: brightness(60%);
+}
+
+.card-animated {
+    transition: 0.1s;
+}
+
+.card-animated:hover {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    transform: scale(1.05);
+}
+
+.user-card {
+    background-color: #F8F8F8;
+}
+
+.user-card-complex {
+    background-color: #F8F8F8;
+}
+
+.user-card:first-child {
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+}
+
+.user-card:last-child {
+    border-bottom-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+}
+
+.user-card-complex-line {
+    border-radius: 5px;
+    background-color: green;
+    align-self: stretch;
+}
+
+.btn {
+    border-radius: 50rem !important;
+}
+
+.blur {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background: rgba(0, 102, 204, 0.6);
+}
+
+.image-thumbnail {
+    object-fit: cover;
+    height: 50px;
+    width: 50px;
+    padding: 0.25rem;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    align-self: stretch;
+}
+
+.card_category {
+    width: 250px;
+    height: 175px;
+    transition: 0.1s;
+}
+
+.card_category:hover {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    transform: scale(1.05);
+}
+
+.card_category_image {
+    filter: brightness(50%);
+}
+
+.login-image {
+    object-fit: cover;
+    z-index: -1;
+    height: 300px;
+    width: 100%;
+}
+
+.profile-header {
+    object-fit: cover;
+    z-index: -1;
+    height: 100px;
+    width: 100%;
+}
+
+.countLines {
+    counter-reset: trCount;
+}
+.countLines tr td:first-child:before {
+    counter-increment: trCount;
+    content:counter(trCount);
+}

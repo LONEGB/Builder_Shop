@@ -1,0 +1,127 @@
+{% extends 'main.html' %}
+{% block title %}Каталог{% endblock %}
+
+{% block content %}
+
+    {% if user.groups.get.name == 'customer' %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-1 d-flex flex-column ">
+                <h3>Категория</h3>
+                <a href="{% url 'product_list' %}">Все</a>
+                {% for c in categories %}
+                    <a href="{% url 'product_list' c.name %}">{{ c.name }}</a>
+                {% endfor %}
+            </div>
+            <div class="col-11">
+                <h1>{% if category %}{{ category.name }}{% else %}Товар{% endif %}</h1>
+                <div class="row">
+                {% if not products %} <h3 class="text-center text-muted">Товаров в выбранной категории нет</h3>{% else %}
+                    {% for product in products %}
+                        <div class="col-auto d-flex flex-column px-4">
+                        <div class="bg-white mb-4">
+                            <img class="img-thumbnail " style="width: 350px; height: 350px" src={{ product.image.url }}>
+                            <div class="text-center mb-2"><a class="text-center" href={% url 'product_detail' product.material_id %}>{{ product.name }}</a></div>
+                            <div class="text-center mb-2">{{ product.price }}руб</div>
+                        </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+        {% if not request.user.is_authenticated %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-1 d-flex flex-column ">
+                <h3>Категория</h3>
+                <a href="{% url 'product_list' %}">Все</a>
+                {% for c in categories %}
+                    <a href="{% url 'product_list' c.name %}">{{ c.name }}</a>
+                {% endfor %}
+            </div>
+            <div class="col-11">
+                <h1>{% if category %}{{ category.name }}{% else %}Товар{% endif %}</h1>
+                <div class="row">
+                {% if not products %} <h3 class="text-center text-muted">Товаров в выбранной категории нет</h3>{% else %}
+                    {% for product in products %}
+                        <div class="col-auto d-flex flex-column px-4">
+                        <div class="bg-white mb-4">
+                            <img class="img-thumbnail " style="width: 350px; height: 350px" src={{ product.image.url }}>
+                            <div class="text-center mb-2"><a class="text-center" href={% url 'product_detail' product.material_id %}>{{ product.name }}</a></div>
+                            <div class="text-center mb-2">{{ product.price }}руб</div>
+                        </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+
+    {% if user.groups.get.name == 'saler' %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-1 d-flex flex-column ">
+                <h3>Категория</h3>
+
+        <form  action="{% url 'add_category' %}" role="search" method="post">
+                {% csrf_token %}
+                    {% if category %}
+                <input class="form-control me-2" name="category" type="search" value="" placeholder="Введите название категории" aria-label="Search">
+                {% else %}
+                <input class="form-control me-2 mt-0" name="category" type="search" placeholder="Введите название категории" aria-label="Search">
+                {% endif %}
+        <button class="btn btn-primary btn-block mt-4 align-content-center" type="submit">Добавить</button>
+        <div style="height: 10px"></div>
+        </form>
+
+{#        <form  action="{% url 'delete_category' %}" role="search" method="post">#}
+{#                {% csrf_token %}#}
+{#                    {% if category %}#}
+{#                <input class="form-control me-2" name="category" type="search" value="" placeholder="Введите название категории" aria-label="Search">#}
+{#                {% else %}#}
+{#                <input class="form-control me-2" name="category" type="search" placeholder="Введите название категории" aria-label="Search">#}
+{#                {% endif %}#}
+{##}
+{#        <button class="btn btn-primary btn-block mt-4 align-content-center" type="submit">Удалить</button>#}
+{#        </form>#}
+
+                <a href="{% url 'product_list' %}">Все</a>
+                {% for c in categories %}
+                <div class="bg-white mb-4 border border-1 ">  <a href="{% url 'product_list' c.name %}">{{ c.name }}</a> <a  href="{% url 'delete_category' c.category_id %}">Удалить</a></div>
+                {% endfor %}
+
+
+            </div>
+            <div class="col-11">
+            <a class="btn btn-primary btn-block mt-4 align-content-center" href="{% url 'add_material' %}">Добавить товар</a>
+                <h1>{% if category %}{{ category.name }}{% else %}Товар{% endif %}</h1>
+                <div class="row">
+                {% if not products %} <h3 class="text-center text-muted">Товаров в выбранной категории нет</h3>{% else %}
+                    {% for product in products %}
+                        <div class="col-auto d-flex flex-column px-4">
+                        <div class="bg-white mb-4">
+                            <img class="img-thumbnail " style="width: 350px; height: 350px" src={{ product.image.url }}>
+                            <div class="text-center mb-2"><a class="text-center" href={% url 'product_detail' product.material_id %}>{{ product.name }}</a></div>
+                            <div class="text-center mb-2">{{ product.price }}руб</div>
+                                <a class="btn btn-primary btn-block mt-4 align-content-center" href="{% url 'delete_material' product.material_id %}">Удалить</a>
+                                <a class="btn btn-primary btn-block mt-4 align-content-center" href="{% url 'update_material' product.material_id %}">Редактрировать</a>
+                        </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    {% endif %}
+
+{% endblock %}

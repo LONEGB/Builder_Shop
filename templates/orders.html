@@ -1,0 +1,70 @@
+{% extends "main.html" %}
+{% block title %} Заказы {% endblock %}
+{% block content %}
+
+    <h1>Заказы</h1><h1><a class="btn btn-primary" href="{% url 'searh' %}">Состав заказа</a></h1>
+    <table class="table text-center table-hover">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>
+                <form>
+                    <button class="btn" type="submit" name="filter" value="customer"><b>Покупатель</b></button>
+                </form>
+            </th>
+            <th>
+                <form>
+                    <button class="btn" type="submit" name="filter" value="date"><b>Дата заказа</b></button>
+                </form>
+            </th>
+            <th>
+                <form>
+                    <button class="btn" type="submit" name="filter" value="status"><b>Статус</b></button>
+                </form>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in orders %}
+
+            <tr>
+                <th scope="row">{{ item.order_id }}</th>
+                <td>{{ item.customer.last_name }}</td>
+                <td>{{ item.date }}</td>
+                <td>
+                    <div class="d-flex justify-content-center">
+                        {{ item.status }}
+                        {% if item.status == "В обработке" %}
+                            <form class="mx-2" method="POST" action="{% url 'update_view_status' item.order_id %}">
+                                {% csrf_token %}
+                                <button type="submit" name="updateStatusButton" class="btn btn-outline-success btn-sm">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="bi bi-check-lg" viewBox="0 0 16 16">
+                                        <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                                    </svg>
+                                </button>
+                                <input type="hidden" value="Выполнен" name="status">
+                            </form>
+                        {% endif %}
+                        {% if item.status == "Выполнен" %}
+                            <form class="mx-2" method="POST" action="{% url 'update_view_status' item.order_id %}">
+                                {% csrf_token %}
+                                <button type="submit" name="updateStatusButton" class="btn btn-outline-success btn-sm">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="bi bi-check-lg" viewBox="0 0 16 16">
+                                        <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                                    </svg>
+                                </button>
+                                <input type="hidden" value="В обработке" name="status">
+                            </form>
+                        {% endif %}
+                    </div>
+                </td>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

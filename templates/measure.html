@@ -1,0 +1,22 @@
+{% extends "main.html" %}
+
+{% block title %}Добавление единицы измерения{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <form class="form-horizontal d-flex justify-content-center align-items-center" method="post">
+            <div class="jumbotron shadow-sm px-5 py-5">
+                <div class="d-flex justify-content-center flex-column">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="btn btn-primary btn-block mt-4 align-content-center" type="submit">Добавить единицу
+                    </button>
+                </div>
+            </div>
+        </form>
+
+                {% for c in measuries %}
+                <div class="bg-white mb-4 border border-1 ">  <a href="{% url 'measure_list' %}">{{ c.measure }}</a> <a  href="{% url 'delete_measure' c.measure_id %}">Удалить</a></div>
+                {% endfor %}
+    </div>
+{% endblock %}

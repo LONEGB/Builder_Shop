@@ -1,0 +1,53 @@
+{% extends "main.html" %}
+
+{% block title %}Добавление товара{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+{#        <p>#}
+{#            <label>Введите название</label><br>#}
+{#            <input type="text" name="name" value="{{mat.name}}" />#}
+{#        </p>#}
+{#        <p>#}
+{#            <label>Введите вес</label><br>#}
+{#            <input type="number" name="weight" value="{{mat.weight}}" />#}
+{#        </p>#}
+{#        <p>#}
+{#            <label>Введите единицу измеренеия</label><br>#}
+{#            <input type="text" name="measure" value="{{mat.measure}}" />#}
+{#        </p>#}
+{#        <p>#}
+{#            <label>Введите объем</label><br>#}
+{#            <input type="number" name="volume" value="{{mat.volume}}" />#}
+{#        </p>#}
+{#        <p>#}
+{#            <label>Введите длину</label><br>#}
+{#            <input type="number" name="length" value="{{mat.length}}" />#}
+{#        </p>#}
+{#        <p>#}
+{#            <label>Введите ширину</label><br>#}
+{#            <input type="number" name="width" value="{{mat.width}}" />#}
+{#        </p>#}
+{#        <p>#}
+{#            <label>Введите высоту</label><br>#}
+{#            <input type="number" name="height" value="{{mat.height}}" />#}
+{#        </p>#}
+{#        <p>#}
+{#            <label>Введите категорию</label><br>#}
+{#            <input type="text" name="category" value="{{mat.category}}" />#}
+{#        </p>#}
+{#        <p>#}
+{#            <label>Введите цену</label><br>#}
+{#            <input type="number" name="height" value="{{mat.height}}" />#}
+{#        </p>#}
+{#        <p>#}
+{#            <label>Выберите изображение</label><br>#}
+{#            <input type="image" name="image" value="{{mat.image}}" />#}
+{#        </p>#}
+            {{ form.as_p }}
+        <input type="submit" value="Сохранить" >
+    </form>
+    </div>
+{% endblock %}
